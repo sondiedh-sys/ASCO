@@ -15,7 +15,7 @@ let () =
     Check_scope.check_scope ast;
     Check_types.check_types ast;
     (* Pour debug : afficher l'AST si tu veux *)
-    (* Ast.print_file ast; *)
+    Ast.print_file ast; 
     print_endline "OK";
   with
   | Parsing.Parse_error ->
