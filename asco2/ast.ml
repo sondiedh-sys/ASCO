@@ -20,15 +20,15 @@ type ctype = {
   pointer : int; (* 0 pour une variable, 1 pour *, 2 pour **, etc. *)
 }
 
-(* Opérateurs binaires arithmétiques [cite: 40] *)
+(* Opérateurs binaires arithmétiques *)
 type binop = 
   | Add | Sub | Mul | Div | Mod
 
-(* Opérateurs de comparaison [cite: 42] *)
+(* Opérateurs de comparaison *)
 type cmpop = 
   | Eq | Neq | Lt | Le | Gt | Ge
 
-(* Opérateurs logiques [cite: 43] *)
+(* Opérateurs logiques *)
 type logop = 
   | And | Or
 
@@ -41,54 +41,54 @@ type assign_op =
   | Div_Assign  (* /= *)
   | Mod_Assign  (* %= *)
 
-(* Constantes [cite: 23] *)
+(* Constantes *)
 type constant =
   | CInt of int       (* Décimal, octal, hexadécimal convertis en int *)
   | CFloat of float   (* Notation scientifique convertie en float *)
   | CStr of string    (* Chaînes concaténées *)
 
-(* Expressions [cite: 30] *)
+(* Expressions *)
 type expr =
-  | EVar of string                        (* Identifiant [cite: 31] *)
-  | EConst of constant                    (* Constante [cite: 32] *)
-  | ECall of string * expr list           (* Appel de fonction: id(args) [cite: 33] *)
+  | EVar of string                        (* Identifiant *)
+  | EConst of constant                    (* Constante *)
+  | ECall of string * expr list           (* Appel de fonction: id(args) *)
   | EArray of expr * expr                 (* Accès tableau: e[e]  *)
-  | ESizeof of ctype                      (* sizeof(type) [cite: 35] *)
-  | EDeref of expr                        (* Déréférencement: *e [cite: 36] *)
-  | EAddr of expr                         (* Adresse: &e [cite: 37] *)
+  | ESizeof of ctype                      (* sizeof(type) *)
+  | EDeref of expr                        (* Déréférencement: *e *)
+  | EAddr of expr                         (* Adresse: &e *)
   | ECast of ctype * expr                 (* Cast: (type) e  *)
-  | ENot of expr                          (* Négation logique: !e [cite: 39] *)
-  | EBinop of expr * binop * expr         (* Opérations arithmétiques [cite: 40] *)
-  | ECmp of expr * cmpop * expr           (* Comparaisons [cite: 42] *)
-  | ELog of expr * logop * expr           (* Logique &&, || [cite: 43] *)
+  | ENot of expr                          (* Négation logique: !e *)
+  | EBinop of expr * binop * expr         (* Opérations arithmétiques *)
+  | ECmp of expr * cmpop * expr           (* Comparaisons *)
+  | ELog of expr * logop * expr           (* Logique &&, || *)
   | EAssign of expr * assign_op * expr    (* Affectations  *)
-  | EParen of expr                        (* Parenthèses ((e)) [cite: 45] *)
+  | EParen of expr                        (* Parenthèses ((e)) *)
 
-(* Déclarations de variables [cite: 46] *)
-(* Une déclaration comme "int *x, y;" donnera une liste de declarators *)
-type declarator = string * int (* nom, niveau de pointeur *)
+(* Déclarations de variables *)
+
+type declarator = string * int 
 type decl = ctype * declarator list
 
-(* Instructions [cite: 48] *)
+(* Instructions *)
 type instr =
-  | IExpr of expr                         (* e; [cite: 49] *)
-  | IEmpty                                (* ; [cite: 50] *)
-  | IBlock of decl list * instr list      (* { decls... instrs... } [cite: 51] *)
-  | IReturn of expr option                (* return e; ou return; [cite: 53] *)
-  | IIf of expr * instr * instr option    (* if (e) i else i [cite: 54] *)
-  | IWhile of expr * instr                (* while (e) i [cite: 56] *)
-  | IDoWhile of instr * expr              (* do i while (e); [cite: 57] *)
+  | IExpr of expr                         (* e; *)
+  | IEmpty                                (* ; *)
+  | IBlock of decl list * instr list      (* { decls... instrs... } *)
+  | IReturn of expr option                (* return e; ou return; *)
+  | IIf of expr * instr * instr option    (* if (e) i else i *)
+  | IWhile of expr * instr                (* while (e) i *)
+  | IDoWhile of instr * expr              (* do i while (e); *)
   | IFor of expr option * expr option * expr option * instr 
-                                          (* for(e1; e2; e3) i [cite: 58] *)
+                                          (* for(e1; e2; e3) i *)
 
-(* Définition de fonction [cite: 59] *)
-(* type_retour nom(args) { corps } *)
+(* Définition de fonction *)
+
 type arg = ctype * string (* type nom *)
 type func_def = {
   return_type : ctype;
   name : string;
   args : arg list;
-  body : instr; (* C'est forcément un IBlock selon la grammaire *)
+  body : instr; 
 }
 
 (* Élément de haut niveau dans un fichier C  *)

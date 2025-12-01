@@ -1,4 +1,3 @@
-(* ast.mli *)
 
 type type_base = 
   | Void 

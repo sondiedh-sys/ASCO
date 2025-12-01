@@ -1,4 +1,3 @@
-(* printer.mli *)
 
 (* Convertit un type C en chaîne de caractères (ex: "int", "float*") *)
 val string_of_type : Ast.ctype -> string
