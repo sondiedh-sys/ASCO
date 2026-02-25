@@ -1,0 +1,7 @@
+*.cmo
+*.cmi
+*.aux
+*.log
+*.out
+*.toc
+cmoins

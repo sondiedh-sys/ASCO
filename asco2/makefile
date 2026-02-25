@@ -29,11 +29,11 @@ types.cmi: types.mli ast.cmi
 parser.cmi: parser.mli ast.cmi
 	$(OCAMLC) -c parser.mli
 
-# Implémentations
+
 %.cmo: %.ml
 	$(OCAMLC) -c $<
 
-# Dépendances
+
 ast.cmo: ast.cmi
 printer.cmo: printer.cmi ast.cmi
 parser.cmo: parser.cmi ast.cmi
